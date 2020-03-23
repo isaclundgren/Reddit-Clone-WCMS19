@@ -25,6 +25,8 @@ Route::post('/posts', 'PostController@store')->name('store');
 
 Route::get('/posts/{post}', 'PostController@show')->name('show');
 
+Route::delete('/posts/{post}', 'PostController@destroy')->name('destroy');
+
 
 
 Route::get('users', 'UserController@index')->middleware('auth');
