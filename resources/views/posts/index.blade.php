@@ -11,7 +11,7 @@
         <h5 class="card-header">{{ $post->title }}</h5>
         <div class="card-body">
                 <p class="card-text">{{$post->content}}</p>
-            <a href="" class="btn btn-primary">Visit blog</a>
+        <a href="{{URL::route('show', $post->id)}}" class="btn btn-primary">Visit blog</a>
         </div>
     </div>
     @endforeach
