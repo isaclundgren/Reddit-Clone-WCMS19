@@ -14,8 +14,10 @@
                         </div>
                     @endif
 
-                    @if ( auth()->user()->age > 20)
-                        You are old enough to be here
+                    @if ( auth()->user()->is_admin == true)
+                     <p>Welcome Admin - {{auth()->user()->name}}</p>
+                     @else
+                     <p>Welcome User - {{auth()->user()->name}}</p>
                     @endif
                 </div>
             </div>
