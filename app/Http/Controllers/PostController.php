@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 Use App\User;
+Use Auth;
 
 class PostController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    
+
     public function index() {
-        dd($posts = User::find(2)->posts);
-        $posts = Post::all();
 
-        return view('posts.index', compact('posts'));
-
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        
+        return view('posts.index')->with('posts', $user->posts);
     }
 
     public function create() {
@@ -46,9 +53,13 @@ class PostController extends Controller
     // }
 
     public function show(\App\Post $post) {
+
+      
         $post = Post::findOrFail($post->id);
         
         return view('posts.show', compact('post'));
+
+        
     }
 
     public function destroy($id) {
