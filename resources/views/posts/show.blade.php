@@ -13,7 +13,8 @@
                     <p class="card-text">{{$post->content}}</p>
                 <input type="hidden" name="_method" value="DELETE">
                 <button type="submit" class="btn btn-danger">Delete blog</button>
-                <a href="" class="btn btn-dark">Edit blog</a>
+                {{-- <a href="/posts/edit/{{ $post->id }}" class="btn btn-primary">Edit Blog</a> --}}
+                <a href="{{action('PostController@edit', $post->id)}}" class="btn btn-primary">Edit blog</a>
             </div>
         </div>
     </form>

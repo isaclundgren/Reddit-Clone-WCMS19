@@ -27,6 +27,18 @@ Route::get('/posts/{post}', 'PostController@show')->name('show');
 
 Route::delete('/posts/{post}', 'PostController@destroy')->name('destroy');
 
+Route::get('/edit/post/{post}', 'PostController@edit')->name('edit');
+
+Route::patch('/edit/post/{id}', 'PostController@update')->name('update');
+
+
+
+// Route::match(['put', 'patch'], '/posts/update/{post}', 'PostController@update')->name('update');
+
+
+
+
+
 
 
 Route::get('users', 'UserController@index')->middleware('auth');

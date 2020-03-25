@@ -53,4 +53,29 @@ class PostController extends Controller
         $post = Post::findOrFail($id)->delete();
         return redirect('/posts');
     }
+
+    public function edit($id) {
+        $post = Post::where('user_id', auth()->user()->id)
+            ->where('id', $id)
+            ->first();
+
+        return view('posts.edit', compact('post', 'id'));
+    }
+
+    public function update(Request $request, $id) {
+        
+        $post = new Post();
+        
+        $data = $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+        
+        $data['id'] = $id;
+        $post->updateTicket($data);
+        // $post->update($request->all());
+        
+        return redirect('/posts')
+            ->with('success', 'Post updated successfully');
+    }
 }
