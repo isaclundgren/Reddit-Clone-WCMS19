@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+Use App\User;
 
 class PostController extends Controller
 {
     public function index() {
+        dd($posts = User::find(2)->posts);
         $posts = Post::all();
 
         return view('posts.index', compact('posts'));
