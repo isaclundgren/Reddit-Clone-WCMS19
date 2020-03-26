@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('content');
+            $table->text('categories')->nullable();
             // $table->string('author');
             $table->timestamps();
         });

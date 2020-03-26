@@ -8,6 +8,14 @@ class Post extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'categories' => 'array'
+    ];
+
+    //protected $fillable = ['title', 'content', 'categories'];
+
+    //protected $table = 'categories';
+
     public function user() {
         return $this->belongsTo(User::class);
     }

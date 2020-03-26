@@ -30,10 +30,11 @@ class PostController extends Controller
         return view ('posts.create');
     }
 
-    public function store() {
+    public function store(\App\Post $post) {
         $data = request()->validate([
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'categories' => 'required|array'
         ]);
 
         $posts = auth()->user()->posts()->create($data);
