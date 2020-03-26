@@ -16,11 +16,14 @@ class PostController extends Controller
     
 
     public function index() {
-
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        
-        return view('posts.index')->with('posts', $user->posts);
+        if(auth()->user()->is_admin == true){
+            $posts = Post::all();
+            return view('posts.index', compact('posts'));
+        } else {
+            $user_id = auth()->user()->id;
+            $user = User::find($user_id);
+            return view('posts.index')->with('posts', $user->posts);
+        }
     }
 
     public function create() {
@@ -53,9 +56,12 @@ class PostController extends Controller
     // }
 
     public function show(\App\Post $post) {
-        
-        $post = Post::findOrFail($post->id);
-        return view('posts.show', compact('post'));
+        if(auth()->user()->id === $post->user_id) {
+            $post = Post::findOrFail($post->id);
+            return view('posts.show', compact('post'));
+        } else {
+            return redirect('/posts');
+        }
     }
 
     public function destroy($id) {

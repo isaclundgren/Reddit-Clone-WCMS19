@@ -33,7 +33,6 @@ Route::patch('/edit/post/{id}', 'PostController@update')->name('update');
 
 
 
-// Route::match(['put', 'patch'], '/posts/update/{post}', 'PostController@update')->name('update');
 
 
 
