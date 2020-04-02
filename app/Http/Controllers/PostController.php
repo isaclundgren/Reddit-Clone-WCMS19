@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Post;
 Use App\User;
-Use Auth;
+use App\Subreddit;
+
+
 
 class PostController extends Controller
 {
@@ -26,35 +29,32 @@ class PostController extends Controller
         }
     }
 
-    public function create() {
-        return view ('posts.create');
+    public function create(Subreddit $subreddit) {
+        return view('posts.create', [
+            'subreddit' => $subreddit
+        ]);
     }
 
-    public function store(\App\Post $post) {
+    public function store(Request $request, Subreddit $subreddit) {   
         $data = request()->validate([
             'title' => 'required',
+            'link' => 'required',
             'content' => 'required',
-            'categories' => 'required|array'
         ]);
 
-        $posts = auth()->user()->posts()->create($data);
 
-        return redirect('/posts/'.$posts->id);
+        $post = new Post;
+        $post->user_id = auth()->user()->id;
+        $post->subreddit_id = $subreddit->id;
+        $post->title = $request->input('title');
+        $post->link = $request->input('link');
+        $post->content = $request->input('content');
+       
+        $post->save();
+    
+        return redirect('/posts/'.$post->id);
     }
 
-    // public function store(Request $request) {
-    //     $post = new Post();
-
-    //     $post->title = request('title');
-    //     $post->author_id = Auth::user()->id;
-    //     $post->author = Auth::user()->name;
-    //     $post->author = request('author');
-    //     $post->content = request('content');
-
-    //     $post->save();
-
-    //     return redirect('/posts');
-    // }
 
     public function show(\App\Post $post) {
         if(auth()->user()->id === $post->user_id) {
@@ -93,5 +93,23 @@ class PostController extends Controller
         
         return redirect('/posts')
             ->with('success', 'Post updated successfully');
+
+
+                // public function store(\App\Post $post) {
+    //     $data = request()->validate([
+    //         'title' => 'required',
+    //         'content' => 'required',
+    //         'subreddit' => 'exists:subreddits,name'
+    //         // 'categories' => 'required|array'
+    //     ]);
+        
+    //     $subredditName = $request->get('subreddit');
+
+    //     $subreddit = Subreddit::where('name', $subredditName)->first();
+
+    //     $posts = auth()->user()->posts()->create($data);
+
+    //     return redirect('/posts/'.$posts->id);
+    // }
     }
 }

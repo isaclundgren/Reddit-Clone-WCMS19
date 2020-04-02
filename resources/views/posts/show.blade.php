@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-   <h2 class="text-center">All Posts</h2>
+   <h2 class="text-center">Post id {{ $post->id }}</h2>
    
     <form action="/posts/{{$post->id}}" method="POST">
         @csrf

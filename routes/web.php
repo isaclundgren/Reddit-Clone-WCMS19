@@ -19,9 +19,9 @@ Route::get('/', function () {
 
 Route::get('/posts', 'PostController@index');
 
-Route::get('/posts/create', 'PostController@create')->name('create');
+Route::get('/posts/create/{subreddit}', 'PostController@create')->name('create');
 
-Route::post('/posts', 'PostController@store')->name('store');
+Route::post('/posts/create/{subreddit}', 'PostController@store')->name('store');
 
 Route::get('/posts/{post}', 'PostController@show')->name('show');
 
@@ -30,6 +30,16 @@ Route::delete('/posts/{post}', 'PostController@destroy')->name('destroy');
 Route::get('/edit/post/{post}', 'PostController@edit')->name('edit');
 
 Route::patch('/edit/post/{id}', 'PostController@update')->name('update');
+
+//SubReddits
+
+Route::get('/subreddits', 'SubredditController@index');
+
+Route::get('/subreddits/create', 'SubredditController@create')->name('create');
+
+Route::post('/subreddits', 'SubredditController@store')->name('store');
+
+Route::get('/subreddits/{subreddit}', 'SubredditController@show')->name('show');
 
 
 

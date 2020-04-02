@@ -12,12 +12,12 @@ class Post extends Model
         'categories' => 'array'
     ];
 
-    //protected $fillable = ['title', 'content', 'categories'];
-
-    //protected $table = 'categories';
-
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function subreddit() {
+        return $this->belongsTo(Subreddit::class);
     }
 
     public function updateTicket($data) {
