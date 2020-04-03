@@ -38,7 +38,7 @@ class SubredditController extends Controller
             'title' => 'required',
         ]);
 
-        $subreddits = auth()->user()->subreddit()->create($data);
+        $subreddits = auth()->user()->subreddits()->create($data);
 
         return redirect('/subreddits/'.$subreddits->id);
     }

@@ -41,7 +41,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function subreddit() {
+    public function subreddits() {
         return $this->hasMany(Subreddit::class);
     }
 }

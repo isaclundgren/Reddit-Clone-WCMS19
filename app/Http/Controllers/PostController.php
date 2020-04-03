@@ -21,11 +21,13 @@ class PostController extends Controller
     public function index() {
         if(auth()->user()->is_admin == true){
             $posts = Post::all();
-            return view('posts.index', compact('posts'));
+            $subreddits = Subreddit::all();
+            return view('posts.index', compact('subreddits', 'posts'));
         } else {
             $user_id = auth()->user()->id;
             $user = User::find($user_id);
-            return view('posts.index')->with('posts', $user->posts);
+            return view('posts.index')
+                ->with('posts', $user->posts);
         }
     }
 

@@ -14,10 +14,10 @@
         <a href="{{URL::route('show', $post->id)}}" class="btn btn-primary">Visit blog</a>
         </div>
         <div class="card-footer text-muted">
-            {{-- <p>Categories</p>
-            @foreach($post->categories as $category)
-            <span><small>{{ $category }}</small></span>
-            @endforeach --}}
+            <p>Subreddit</p>
+            @foreach($subreddits as $subreddit)
+            <span>{{ $subreddit->name }}</span>
+            @endforeach
         </div>
     </div>
     @endforeach
