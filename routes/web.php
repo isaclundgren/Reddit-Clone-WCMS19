@@ -39,7 +39,7 @@ Route::get('/subreddits/create', 'SubredditController@create')->name('create');
 
 Route::post('/subreddits', 'SubredditController@store')->name('store');
 
-Route::get('/subreddits/{subreddit}', 'SubredditController@show')->name('show');
+Route::get('/subreddits/{subreddit}', 'SubredditController@show')->name('subreddit.show');
 
 
 

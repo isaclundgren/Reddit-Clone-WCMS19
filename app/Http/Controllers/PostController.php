@@ -55,7 +55,7 @@ class PostController extends Controller
        
         $post->save();
     
-        return redirect('/posts/'.$post->id);
+        return redirect('/subreddits/'.$subreddit->id);
     }
 
 
