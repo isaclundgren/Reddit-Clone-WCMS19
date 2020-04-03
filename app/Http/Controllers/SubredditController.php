@@ -46,10 +46,17 @@ class SubredditController extends Controller
 
     public function show(\App\Subreddit $subreddit) {
 
-        return view('subreddits.show', [
-            'subreddit' => $subreddit,
-            'posts' => $subreddit->posts
-        ]);
+
+        $posts = Subreddit::findOrFail($subreddit->id)->posts()->get();
+        
+        return view('subreddits.show')
+            ->with('subreddit', $subreddit)
+            ->with('posts', $posts);
+
+        // return view('subreddits.show', [
+        //     'subreddit' => $subreddit,
+        //     'posts' => $subreddit->posts
+        // ]);
 
         // if(auth()->user()->id === $subreddit->user_id) {
         //     $subreddit = Subreddit::findOrFail($subreddit->id);
