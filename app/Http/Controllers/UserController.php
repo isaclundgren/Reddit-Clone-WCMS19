@@ -13,7 +13,6 @@ class UserController extends Controller
    public function index() {
        $users = User::all();
 
-
         if(Auth::user()->is_admin == true){
             return view ('users.index', [
                 'users' => $users
