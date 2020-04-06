@@ -18,14 +18,18 @@ class SubredditController extends Controller
     
 
     public function index() {
-        if(auth()->user()->is_admin == true){
+        // if(auth()->user()->is_admin == true){
             $subreddits = Subreddit::all();
-            return view('subreddits.index', compact('subreddits'));
-        } else {
-            $user_id = auth()->user()->id;
-            $user = User::find($user_id);
-            return view('subreddits.index')->with('subreddits', $user->subreddits);
-        }
+            return view('subreddits.index')
+                ->with('subreddits', $subreddits);
+
+
+
+        // } else {
+        //     $user_id = auth()->user()->id;
+        //     $user = User::find($user_id);
+        //     return view('subreddits.index')->with('subreddits', $user->subreddits);
+        // }
     }
 
     public function create() {

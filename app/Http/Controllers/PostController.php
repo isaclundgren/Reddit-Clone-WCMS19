@@ -97,22 +97,5 @@ class PostController extends Controller
         return redirect('/posts')
             ->with('success', 'Post updated successfully');
 
-
-                // public function store(\App\Post $post) {
-    //     $data = request()->validate([
-    //         'title' => 'required',
-    //         'content' => 'required',
-    //         'subreddit' => 'exists:subreddits,name'
-    //         // 'categories' => 'required|array'
-    //     ]);
-        
-    //     $subredditName = $request->get('subreddit');
-
-    //     $subreddit = Subreddit::where('name', $subredditName)->first();
-
-    //     $posts = auth()->user()->posts()->create($data);
-
-    //     return redirect('/posts/'.$posts->id);
-    // }
     }
 }

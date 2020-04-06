@@ -43,14 +43,11 @@ Route::get('/subreddits/{subreddit}', 'SubredditController@show')->name('subredd
 
 
 
+Route::get('users', 'AdminController@index')->middleware('auth');
+
+Route::get('user', 'UserController@index')->middleware('auth');
 
 
-
-
-
-
-
-Route::get('users', 'UserController@index')->middleware('auth');
 
 Auth::routes();
 

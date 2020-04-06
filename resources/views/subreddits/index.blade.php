@@ -10,6 +10,10 @@
                 <div class="card-body">
                     <ul class="list-group">
                         <li class="list-group-item">{{ $subreddit->name }} <span class="ml-2">r/{{ $subreddit->title }}</span><button type="submit" class="btn btn-primary btn-sm float-right"><a href="{{URL::route('subreddit.show', $subreddit->id)}}">Go To!</a></button></li>
+                        <li class="list-group-item">Posts that belongs to this subreddit</li>
+                        {{-- @foreach($posts as $post)
+                        <li class="list-group-item">{{ $post->title }}</li>
+                        @endforeach --}}
                     </ul>
                 </div>
                 @endforeach
