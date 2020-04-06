@@ -35,7 +35,7 @@ Route::patch('/edit/post/{id}', 'PostController@update')->name('update');
 
 Route::get('/subreddits', 'SubredditController@index');
 
-Route::get('/subreddits/create', 'SubredditController@create')->name('create');
+Route::get('/subreddits/create', 'SubredditController@create')->name('subreddit.create');
 
 Route::post('/subreddits', 'SubredditController@store')->name('store');
 
@@ -43,9 +43,9 @@ Route::get('/subreddits/{subreddit}', 'SubredditController@show')->name('subredd
 
 
 
-Route::get('users', 'AdminController@index')->middleware('auth');
+Route::get('users', 'AdminController@index')->middleware('auth')->name('users.index');
 
-Route::get('user', 'UserController@index')->middleware('auth');
+Route::get('user', 'UserController@index')->middleware('auth')->name('user.index');
 
 
 

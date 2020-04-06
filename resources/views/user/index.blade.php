@@ -2,8 +2,11 @@
 
 @section('content')
 
+
+
 <div class="container">
-    <table class="table">
+        <h2 class="text-center">Welcome {{ $user->name }}</h2>
+    <table class="table mt-4">
         <thead class="thead-dark">
           <tr>
             <th scope="col">ID</th>
