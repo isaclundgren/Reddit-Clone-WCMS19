@@ -13,6 +13,15 @@
             <div class="card-body">
                     <p class="card-text">Content- {{ $post->content }}</p>
                     <p class="card-text">Link- {{ $post->link }}</p>
+                    <hr/>
+                <h4>Comments</h4>
+                @foreach($post->comments as $comment)
+                    <div class="display-comments">
+                        <strong>{{ $comment->user->name }}</strong>
+                        <p>{{ $comment->body }}</p>
+                        <hr>
+                    </div>
+                @endforeach
             </div>
         </div>
         @endforeach

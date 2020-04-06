@@ -33,7 +33,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Content</th>
                 <th scope="col">Link</th>
-                <th scope="col">Remove or Update?</th>
+                <th scope="col">Remove Or Update</th>
               </tr>
             </thead>
             @foreach($posts as $post)

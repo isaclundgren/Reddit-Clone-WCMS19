@@ -60,12 +60,11 @@ class PostController extends Controller
 
 
     public function show(\App\Post $post) {
-        if(auth()->user()->id === $post->user_id) {
+        //  if(auth()->user()->id === $post->user_id) {
             $post = Post::findOrFail($post->id);
             return view('posts.show', compact('post'));
-        } else {
-            return redirect('/posts');
-        }
+        // } else {
+        //     return redirect('/posts');
     }
 
     public function destroy($id) {

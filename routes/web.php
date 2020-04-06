@@ -42,10 +42,15 @@ Route::post('/subreddits', 'SubredditController@store')->name('store');
 Route::get('/subreddits/{subreddit}', 'SubredditController@show')->name('subreddit.show');
 
 
+//UserControllers
 
 Route::get('users', 'AdminController@index')->middleware('auth')->name('users.index');
 
 Route::get('user', 'UserController@index')->middleware('auth')->name('user.index');
+
+//CommentControllers
+
+Route::post('/comment/store', 'CommentController@store')->name('comment.add');
 
 
 
