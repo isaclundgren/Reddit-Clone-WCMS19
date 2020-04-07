@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -18,9 +19,17 @@ class UserController extends Controller
                 ->with('posts', $user->posts);
         }
 
-        public function destroy() {
+        public function destroy($id) {
             $post = Post::findOrFail($id)->delete();
             return redirect('/user');
+        }
+
+        public function show(\App\Post $post) {
+            //  if(auth()->user()->id === $post->user_id) {
+                $post = Post::findOrFail($post->id);
+                return view('user.show', compact('post'));
+            // } else {
+            //     return redirect('/posts');
         }
 
         public function update() {

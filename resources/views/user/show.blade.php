@@ -4,7 +4,7 @@
 
 <div class="container">
    <h2 class="text-center">Post id {{ $post->id }}</h2>
-        <form action="/posts/{{$post->id}}" method="POST">
+        <form action="/user/posts/{{$post->id}}" method="POST">
             @csrf
             @method('DELETE')
             <div class="card">
@@ -21,26 +21,14 @@
                     </div>
                 @endforeach    
 
-                {{-- @if($post->user_id == auth()->user()->id || auth()->user()->is_admin == true)
-                    <p>You are the owner of this post. Choose action or comment</p> 
+                @if($post->user_id == auth()->user()->id || auth()->user()->is_admin == true)
+                    <p>You are the owner of this post. Choose action your action</p> 
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete blog</button>
                     <a href="{{action('PostController@edit', $post->id)}}" class="btn btn-primary">Edit blog</a>
-                @else --}}
+                @else
         </form>
-        
-            <h6>Add Comment</h4>
-                <form action="{{ route('comment.add') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="comment_body" id="comment_body">
-                        <input type="hidden" value="{{ $post->id }}" class="form-control" name="post_id" id="post_id" >
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Add comment" class="btn btn-warning">
-                    </div>
-                </form>
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
 </div>

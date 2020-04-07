@@ -25,7 +25,7 @@ Route::post('/posts/create/{subreddit}', 'PostController@store')->name('store');
 
 Route::get('/posts/{post}', 'PostController@show')->name('show');
 
-Route::delete('/posts/{post}', 'PostController@destroy')->name('destroy');
+Route::delete('/posts/{post}', 'PostController@destroy')->name('post.delete');
 
 Route::get('/edit/post/{post}', 'PostController@edit')->name('edit');
 
@@ -47,6 +47,12 @@ Route::get('/subreddits/{subreddit}', 'SubredditController@show')->name('subredd
 Route::get('users', 'AdminController@index')->middleware('auth')->name('users.index');
 
 Route::get('user', 'UserController@index')->middleware('auth')->name('user.index');
+
+Route::get('/user/post/{post}', 'UserController@show')->name('user.show');
+
+Route::delete('user/posts/{post}', 'UserController@destroy')->name('post.delete');
+
+
 
 //CommentControllers
 
