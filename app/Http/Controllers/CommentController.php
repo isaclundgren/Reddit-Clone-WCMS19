@@ -14,7 +14,6 @@ class CommentController extends Controller
         $comment->user()->associate($request->user());
         $post = Post::find($request->get('post_id'));
         $post->comments()->save($comment);
-
         return back();
     }
 }
