@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 Use App\User;
 use App\Subreddit;
+use Illuminate\Support\Str;
 
 
 
@@ -18,19 +19,19 @@ class PostController extends Controller
 
     
 
-    public function index() {
-        if(auth()->user()->is_admin == true){
-            $posts = Post::all();
-            return view('posts.index')
-                ->with('posts', $posts);
+    // public function index() {
+    //     if(auth()->user()->is_admin == true){
+    //         $posts = Post::all();
+    //         return view('posts.index')
+    //             ->with('posts', $posts);
                 
-        } else {
-            $user_id = auth()->user()->id;
-            $user = User::find($user_id);
-            return view('posts.index')
-                ->with('posts', $user->posts);
-        }
-    }
+    //     } else {
+    //         $user_id = auth()->user()->id;
+    //         $user = User::find($user_id);
+    //         return view('posts.index')
+    //             ->with('posts', $user->posts);
+    //     }
+    // }
 
     public function create(Subreddit $subreddit) {
         return view('posts.create', [
@@ -45,11 +46,11 @@ class PostController extends Controller
             'content' => 'required',
         ]);
 
-
         $post = new Post;
         $post->user_id = auth()->user()->id;
         $post->subreddit_id = $subreddit->id;
         $post->title = $request->input('title');
+        $post->slug = Str::slug(request('title'));
         $post->link = $request->input('link');
         $post->content = $request->input('content');
        
@@ -59,17 +60,26 @@ class PostController extends Controller
     }
 
 
-    public function show(\App\Post $post) {
+    public function show($slug) {
+
+        $post = Post::where('slug', $slug)->first();
+            if(is_null($post)) {
+                return redirect('/subreddits');
+            } else {
+                return view('posts.show', compact('post'));
+            }
+
         //  if(auth()->user()->id === $post->user_id) {
-            $post = Post::findOrFail($post->id);
-            return view('posts.show', compact('post'));
+            //working version
+            // $post = Post::findOrFail($post->id);
+            // return view('posts.show', compact('post'));
         // } else {
         //     return redirect('/posts');
     }
 
     public function destroy($id) {
         $post = Post::findOrFail($id)->delete();
-        return redirect('/posts');
+        return redirect('/user');
     }
 
     public function edit($id) {
@@ -91,9 +101,8 @@ class PostController extends Controller
         
         $data['id'] = $id;
         $post->updateTicket($data);
-        // $post->update($request->all());
         
-        return redirect('/posts')
+        return redirect('/user')
             ->with('success', 'Post updated successfully');
 
     }

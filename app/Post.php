@@ -24,6 +24,7 @@ class Post extends Model
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
 
+
     public function updateTicket($data) {
         $post = $this->find($data['id']);
         $post->user_id = auth()->user()->id;

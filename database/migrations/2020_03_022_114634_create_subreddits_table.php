@@ -15,6 +15,7 @@ class CreateSubredditsTable extends Migration
     {
         Schema::create('subreddits', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique()->nullable();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('title');

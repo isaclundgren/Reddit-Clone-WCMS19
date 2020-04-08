@@ -17,13 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', 'PostController@index');
+//Route::get('/posts', 'PostController@index');
 
 Route::get('/posts/create/{subreddit}', 'PostController@create')->name('create');
 
 Route::post('/posts/create/{subreddit}', 'PostController@store')->name('store');
 
-Route::get('/posts/{post}', 'PostController@show')->name('show');
+Route::get('/posts/{slug}', 'PostController@show')->name('show');
 
 Route::delete('/posts/{post}', 'PostController@destroy')->name('post.delete');
 
@@ -48,7 +48,7 @@ Route::get('users', 'AdminController@index')->middleware('auth')->name('users.in
 
 Route::get('user', 'UserController@index')->middleware('auth')->name('user.index');
 
-Route::get('/user/post/{post}', 'UserController@show')->name('user.show');
+Route::get('/user/post/{slug}', 'UserController@show')->name('user.show');
 
 Route::delete('user/posts/{post}', 'UserController@destroy')->name('post.delete');
 

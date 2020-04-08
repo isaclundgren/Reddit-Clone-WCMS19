@@ -23,9 +23,7 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->content }}</td>
                 <td>{{ $post->link }}</td>
-                <td><a href="{{action('UserController@show', $post->id)}}" class="btn btn-primary">Take Action</a></td>
-                {{-- <td><a href="{{ action('post.delete', $post->id) }}" class="btn btn-primary">Delete</a></td> --}}
-                {{-- <td><a href="{{URL::route('show', $post->id)}}"><button type="submit" class="btn btn-primary">Click here!</button></a></td> --}}
+                <td><a href="{{action('UserController@show', $post->slug)}}" class="btn btn-primary">Take Action</a></td>
             </tr>
             </tbody>
         @endforeach

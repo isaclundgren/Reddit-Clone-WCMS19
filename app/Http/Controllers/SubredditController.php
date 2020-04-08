@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Subreddit;
 Use App\User;
-
+use Illuminate\Support\Str;
 
 class SubredditController extends Controller
 {
@@ -28,28 +28,40 @@ class SubredditController extends Controller
         return view ('subreddits.create');
     }
 
-    public function store(\App\Subreddit $subreddit) {
+    public function store(Subreddit $subreddit) {
         $data = request()->validate([
             'name' => 'required',
             'title' => 'required',
         ]);
 
+        //$data['name'] = Str::slug($data['name'], '-');
+        
         $subreddits = auth()->user()->subreddits()->create($data);
 
         return redirect('/subreddits/'.$subreddits->id);
     }
 
 
+    // public function show(Subreddit $subreddit) {
+    //     $subreddit = Subreddit::where('slug', $slug)->first();
+    //         if(is_null($subreddit)) {
+    //             return redirect('subreddits');
+    //         } else {
+    //             return view('subreddits.show')
+    //                 ->with('subreddit', $subreddit)
+    //                 ->with('posts', $posts);
+    //         }
+
+    // }
+
     public function show(\App\Subreddit $subreddit) {
-
-
         $posts = Subreddit::findOrFail($subreddit->id)->posts()->get();
-        
         return view('subreddits.show')
             ->with('subreddit', $subreddit)
             ->with('posts', $posts);
+    }
 
-        // return view('subreddits.show', [
+      // return view('subreddits.show', [
         //     'subreddit' => $subreddit,
         //     'posts' => $subreddit->posts
         // ]);
@@ -60,35 +72,4 @@ class SubredditController extends Controller
         // } else {
         //     return redirect('/subreddits');
         // }
-    }
-
-    // public function destroy($id) {
-    //     $post = Post::findOrFail($id)->delete();
-    //     return redirect('/posts');
-    // }
-
-    // public function edit($id) {
-    //     $post = Post::where('user_id', auth()->user()->id)
-    //         ->where('id', $id)
-    //         ->first();
-
-    //     return view('posts.edit', compact('post', 'id'));
-    // }
-
-    // public function update(Request $request, $id) {
-        
-    //     $post = new Post();
-        
-    //     $data = $this->validate($request, [
-    //         'title' => 'required',
-    //         'content' => 'required',
-    //     ]);
-        
-    //     $data['id'] = $id;
-    //     $post->updateTicket($data);
-    //     // $post->update($request->all());
-        
-    //     return redirect('/posts')
-    //         ->with('success', 'Post updated successfully');
-    // }
 }
