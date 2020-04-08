@@ -32,7 +32,6 @@
                 <th scope="col">ID</th>
                 <th scope="col">Title</th>
                 <th scope="col">Content</th>
-                <th scope="col">Link</th>
                 <th scope="col">Remove Or Update</th>
               </tr>
             </thead>
@@ -42,8 +41,7 @@
                     <th scope="row">{{ $post->id }}</th>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
-                    <td>{{ $post->link }}</td>
-                    <td><a href="{{action('UserController@show', $post->id)}}" class="btn btn-primary">Take Action</a></td>
+                    <td><a href="{{action('UserController@show', $post->slug)}}" class="btn btn-primary">Take Action</a></td>
                 </tr>
                 </tbody>
             @endforeach

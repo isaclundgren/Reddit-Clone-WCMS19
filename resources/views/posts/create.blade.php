@@ -9,11 +9,6 @@
             <label for="exampleFormControlInput1">Title</label>
             <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
         </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Link</label>
-            <input name="link" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Link">
-        </div>
         
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Content</label>

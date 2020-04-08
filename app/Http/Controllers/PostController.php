@@ -42,7 +42,6 @@ class PostController extends Controller
     public function store(Request $request, Subreddit $subreddit) {   
         $data = request()->validate([
             'title' => 'required',
-            'link' => 'required',
             'content' => 'required',
         ]);
 
@@ -51,7 +50,6 @@ class PostController extends Controller
         $post->subreddit_id = $subreddit->id;
         $post->title = $request->input('title');
         $post->slug = Str::slug(request('title'));
-        $post->link = $request->input('link');
         $post->content = $request->input('content');
        
         $post->save();
@@ -80,9 +78,12 @@ class PostController extends Controller
         //     return redirect('/posts');
     }
 
+
+    
     public function destroy($id) {
         $post = Post::findOrFail($id)->delete();
         return redirect('/user');
+        
     }
 
     public function edit($id) {

@@ -21,8 +21,13 @@ class UserController extends Controller
         }
 
         public function destroy($id) {
-            $post = Post::findOrFail($id)->delete();
-            return redirect('/user');
+            if(auth()->user()->is_admin == true) {
+                $post = Post::findOrFail($id)->delete();
+                return redirect('/users');
+            } else {
+                $post = Post::findOrFail($id)->delete();
+                return redirect ('/user');
+            }
         }
 
         public function show($slug) {
