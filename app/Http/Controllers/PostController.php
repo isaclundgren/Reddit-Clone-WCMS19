@@ -60,13 +60,16 @@ class PostController extends Controller
     }
 
 
-    public function show($slug) {
+    public function show(Subreddit $subreddit, User $user, $slug) {
 
         $post = Post::where('slug', $slug)->first();
             if(is_null($post)) {
                 return redirect('/subreddits');
             } else {
-                return view('posts.show', compact('post'));
+                return view('posts.show')
+                    ->with('post', $post)
+                    ->with('subreddit', $subreddit)
+                    ->with('user', $user);
             }
 
         //  if(auth()->user()->id === $post->user_id) {

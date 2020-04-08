@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="container">
-   <h2 class="text-center">Post id {{ $post->id }}</h2>
+   <h2 class="text-center">{{ $post->title }}</h2>
         <form action="/posts/{{$post->id}}" method="POST">
             @csrf
             @method('DELETE')
             <div class="card">
-            <h5 class="card-header">{{ $post->title }}</h5>
+            <h5 class="card-header">r/ {{ $post->subreddit->name }}</h5>
             <div class="card-body">
                 <p class="card-text">{{$post->content}}</p>
                 <hr/>
@@ -41,6 +41,9 @@
                     </div>
                 </form>
             {{-- @endif --}}
+        </div>
+        <div class="card-footer text-muted">
+                <p>Posted by {{$post->user->name}} at {{ $post->user->created_at }}</p>
         </div>
     </div>
 </div>
