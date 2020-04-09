@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="/posts/create/{{ $subreddit->id }}" method="POST">
+    <form action="/posts/create/{{ $subreddit->id }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="exampleFormControlInput1">Title</label>
@@ -23,6 +23,11 @@
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Content</label>
             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+                <label for="image">Post Image</label>
+                <input type="file" class="form-control-file" name="image">
         </div>
 
 

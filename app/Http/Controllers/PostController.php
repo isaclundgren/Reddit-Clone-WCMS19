@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Post;
 Use App\User;
+use Image;
+use Storage;
 use App\Subreddit;
 use Illuminate\Support\Str;
 
@@ -43,18 +46,27 @@ class PostController extends Controller
         $data = request()->validate([
             'title' => 'required',
             'content' => 'required',
+            'image' => 'sometimes|image'
         ]);
 
-        $post = new Post;
-        $post->user_id = auth()->user()->id;
-        $post->subreddit_id = $subreddit->id;
-        $post->title = $request->input('title');
-        $post->slug = Str::slug(request('title'));
-        $post->content = $request->input('content');
-       
-        $post->save();
-    
-        return redirect('/posts/'.$post->slug)
+        if($request->hasfile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/') . $filename;
+
+            Image::make($image->getRealPath())->resize(468,249)->save($location);
+
+            $post = new Post;
+            $post->user_id = auth()->user()->id;
+            $post->subreddit_id = $subreddit->id;
+            $post->title = $request->input('title');
+            $post->slug = Str::slug(request('title'));
+            $post->content = $request->input('content');
+            $post->image = $filename;
+            $post->save();
+        
+        }
+            return redirect('/posts/'.$post->slug)
             ->with('message', 'Congrats on your new post');
     }
 
