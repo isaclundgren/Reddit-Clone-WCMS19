@@ -15,9 +15,6 @@
         </div>
         <div class="card-footer text-muted">
             <p>Subreddit</p>
-            {{-- @foreach($subreddits as $subreddit)
-            <span>{{ $subreddit->name }}</span>
-            @endforeach --}}
         </div>
     </div>
     @endforeach

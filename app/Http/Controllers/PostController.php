@@ -20,7 +20,7 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    
+    // Moved to UserController
 
     // public function index() {
     //     if(auth()->user()->is_admin == true){
@@ -46,7 +46,7 @@ class PostController extends Controller
         $data = request()->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'sometimes|image'
+            'image' => 'required|image'
         ]);
 
         if($request->hasfile('image')) {
@@ -72,7 +72,6 @@ class PostController extends Controller
 
 
     public function show(Subreddit $subreddit, User $user, $slug) {
-
         $post = Post::where('slug', $slug)->first();
             if(is_null($post)) {
                 return redirect('/subreddits');
@@ -82,13 +81,6 @@ class PostController extends Controller
                     ->with('subreddit', $subreddit)
                     ->with('user', $user);
             }
-
-        //  if(auth()->user()->id === $post->user_id) {
-            //working version
-            // $post = Post::findOrFail($post->id);
-            // return view('posts.show', compact('post'));
-        // } else {
-        //     return redirect('/posts');
     }
 
 

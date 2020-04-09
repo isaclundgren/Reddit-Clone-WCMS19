@@ -11,6 +11,7 @@
                         {{ session('message') }}
                     </div>
                 @endif
+
                 <form action="/posts/{{$post->id}}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -30,15 +31,8 @@
                                 <hr>
                             </div>
                         @endforeach    
-
-                        {{-- @if($post->user_id == auth()->user()->id || auth()->user()->is_admin == true)
-                            <p>You are the owner of this post. Choose action or comment</p> 
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger">Delete blog</button>
-                            <a href="{{action('PostController@edit', $post->id)}}" class="btn btn-primary">Edit blog</a>
-                        @else --}}
                 </form>
-                
+            
                     <h6>Add Comment</h4>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -59,7 +53,6 @@
                                 <input type="submit" value="Add comment" class="btn btn-info">
                             </div>
                         </form>
-                    {{-- @endif --}}
                 </div>
                 <div class="card-footer text-muted">
                         <p>Posted by {{$post->user->name}} at {{ $post->user->created_at }}</p>

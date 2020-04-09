@@ -33,12 +33,8 @@ class UserController extends Controller
         }
 
         public function show($slug) {
-            //  if(auth()->user()->id === $post->user_id) {
-                //$post = Post::findOrFail($post->id);
                 $post = Post::where('slug', $slug)->first();
                 return view('user.show', compact('post'));
-            // } else {
-            //     return redirect('/posts');
         }
 
         public function update() {
