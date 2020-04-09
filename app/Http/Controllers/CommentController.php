@@ -9,6 +9,11 @@ use App\Post;
 class CommentController extends Controller
 {
     public function store(Request $request) {
+
+        $data = request()->validate([
+            'body' => 'required'
+        ]);
+
         $comment = new Comment;
         $comment->body = $request->get('comment_body');
         $comment->user()->associate($request->user());
