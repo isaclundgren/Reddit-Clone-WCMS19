@@ -13,8 +13,7 @@
         <div class="card mt-4">
             <h5 class="card-header">{{ $post->title }}</h5>
             <div class="card-body">
-                    <p class="card-text">Content- {{ $post->content }}</p>
-                    <p class="card-text">Link- {{ $post->link }}</p>
+                    <p class="card-text">{{ $post->content }}</p>
                     <hr/>
                 <h4>Comments</h4>
                 @foreach($post->comments as $comment)

@@ -37,7 +37,7 @@
                         <input type="hidden" value="{{ $post->id }}" class="form-control" name="post_id" id="post_id" >
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Add comment" class="btn btn-warning">
+                        <input type="submit" value="Add comment" class="btn btn-info">
                     </div>
                 </form>
             {{-- @endif --}}
