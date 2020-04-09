@@ -4,6 +4,11 @@
 
 <div class="container">
    <h2 class="text-center">{{ $post->title }}</h2>
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <form action="/posts/{{$post->id}}" method="POST">
             @csrf
             @method('DELETE')
@@ -30,6 +35,15 @@
         </form>
         
             <h6>Add Comment</h4>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('comment.add') }}" method="POST">
                     @csrf
                     <div class="form-group">

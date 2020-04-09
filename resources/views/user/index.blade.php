@@ -5,7 +5,12 @@
 
 
 <div class="container">
-        <h2 class="text-center">Welcome {{ $user->name }}</h2>
+    <h2 class="text-center">Welcome {{ $user->name }}</h2>
+    @if (session('message'))
+      <div class="alert alert-success">
+        {{ session('message') }}
+      </div>
+    @endif
     <table class="table mt-4">
         <thead class="thead-dark">
           <tr>

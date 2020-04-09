@@ -4,6 +4,11 @@
 
 <div class="container">
    <h2 class="text-center">r/{{ $subreddit->name }}</h2>
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="text-center">
         <a href="/posts/create/{{ $subreddit->id }}" class="text-center btn btn-primary btn-block mt-2">Create Post</a>
     </div>  

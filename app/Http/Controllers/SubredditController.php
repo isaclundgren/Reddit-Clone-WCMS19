@@ -33,12 +33,11 @@ class SubredditController extends Controller
             'name' => 'required',
             'title' => 'required',
         ]);
-
-        //$data['name'] = Str::slug($data['name'], '-');
         
         $subreddits = auth()->user()->subreddits()->create($data);
 
-        return redirect('/subreddits/'.$subreddits->id);
+        return redirect('/subreddits/'.$subreddits->id)
+            ->with('message', 'Your subreddit looks good, now post something!');
     }
 
 

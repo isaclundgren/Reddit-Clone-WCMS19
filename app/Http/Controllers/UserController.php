@@ -23,10 +23,12 @@ class UserController extends Controller
         public function destroy($id) {
             if(auth()->user()->is_admin == true) {
                 $post = Post::findOrFail($id)->delete();
-                return redirect('/users');
+                return redirect('/users')
+                    ->with('message', 'Post was successfully deleted');
             } else {
                 $post = Post::findOrFail($id)->delete();
-                return redirect ('/user');
+                return redirect ('/user')
+                    ->with('message', 'Post was successfully deleted');
             }
         }
 

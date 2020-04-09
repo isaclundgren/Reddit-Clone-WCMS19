@@ -54,7 +54,8 @@ class PostController extends Controller
        
         $post->save();
     
-        return redirect('/subreddits/'.$subreddit->id);
+        return redirect('/posts/'.$post->slug)
+            ->with('message', 'Congrats on your new post');
     }
 
 
@@ -106,8 +107,12 @@ class PostController extends Controller
         $data['id'] = $id;
         $post->updateTicket($data);
         
-        return redirect('/user')
-            ->with('success', 'Post updated successfully');
-
+        if(!auth()->user()->is_admin) {
+            return redirect('/user')
+                ->with('message', 'Post updated successfully');
+        } else {
+            return redirect('/users')
+                ->with('message', 'Post updated successfully');
+        }
     }
 }
